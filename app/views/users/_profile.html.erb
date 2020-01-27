@@ -1,19 +1,37 @@
 <table class="table">
-			<tr>
-				<th><%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></th>
-			</tr>
+	<tr>
+		<th><%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></th>
+	</tr>
 
-			<tr>
-				<th>name</th>
-				<th><%= user.name %></th>
-			</tr>
+	<tr>
+		<th>name</th>
+		<th><%= user.name %></th>
+	</tr>
 
-			<tr>
-				<th>introduction</th>
-				<th><%= user.introduction %></th>
-			</tr>
-	</table>
+	<tr>
+		<th>introduction</th>
+		<th><%= user.introduction %></th>
+	</tr>
 
+	<tr>
+		<th>follows</th>
+		<th>
+			<%= link_to user.followings.count, following_user_path(user.id) %>
+		</th>
+	</tr>
+
+	<tr>
+		<th>followers</th>
+		<th>
+			<%= link_to user.followers.count, followers_user_path(user.id) %>
+		</th>
+	</tr>
+</table>
+
+<% if user_signed_in? && user.id == current_user.id %>
 	<div class="row">
 		<%= link_to '',edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
 	</div>
+<% end %>
+
+
