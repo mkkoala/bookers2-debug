@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'chats/show/:user_id', to:'chats#show', as:'chats'
   devise_for :users
 
   resources :users,only: [:show,:index,:edit,:update] do

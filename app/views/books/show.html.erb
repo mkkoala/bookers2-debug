@@ -53,16 +53,16 @@
 			</tr>
 		</table>
 
-<% if @book_comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= @book_comment.errors.count %> errors prohibited this obj from being saved:</h2>
-      <ul>
-      <% @book_comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-<% end %>
+			<% if @book_comment.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= @book_comment.errors.count %> errors prohibited this obj from being saved:</h2>
+			      <ul>
+			      <% @book_comment.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			<% end %>
 
           <%= form_for @book_comment, url: book_book_comments_path(@book.id), method: :post do |f| %>
 		    <div class="row">
@@ -70,20 +70,22 @@
 		            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
 		        </div>
 		    </div>
-		    <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+		    <%= f.submit "送信する", class: "pull-right" %>
 		  <% end %>
 
 
 		<table class="table">
 			<% @book.book_comments.each do |book_comment| %>
 		        <tr class="comment">
-		        	<td>
 		            <div class="comment-body bb">
+		            <td>
 			            <div class="comment-avatar">
 			              <div class="avatar">
 			                <%= attachment_image_tag book_comment.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
 			              </div>
 			            </div>
+			        </td>
+			        <td>
 			            <div class="comment-text">
 				            <div class="comment-author clearfix">
 				                <a href="#" class="link-author"><%= book_comment.user.name %></a>
@@ -93,10 +95,11 @@
 				            </div>
 				            <div class="comment-entry"><%= book_comment.comment %></div>
 			            </div>
-
+			        </td>
+			        <td>
 			            <% if user_signed_in? && book_comment.user.id == current_user.id %>
 			            <div class="comment-destroy">
-			            	<%= link_to "削除する",book_book_comments_path(@book.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %>
+			            	<%= link_to "Destroy",book_book_comments_path(@book.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %>
 			            </div>
 			            <% end %>
 

@@ -1,0 +1,13 @@
+<div class="container">
+  <h1><%= "#{@user.name}さんとのチャット" %></h1>
+
+  <div id="messages", data-room_id="<%= @room.id %>">
+    <%= render @chats %>
+  </div>
+  <div class="input">
+    <form>
+      <label>post</label>
+      <input type="text" data-behavior="room_speaker">
+    </form>
+  </div>
+</div>
